@@ -6,7 +6,9 @@ const required = [
   'src/styles.css',
   'server/index.js',
   'server/director.js',
-  'tests/director.test.js'
+  'server/agents.js',
+  'tests/director.test.js',
+  'tests/agents.test.js'
 ];
 const failures = [];
 for (const file of required) {
