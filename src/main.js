@@ -72,6 +72,33 @@ function renderCast(cast) {
   });
 }
 
+function performAnimation(action) {
+  const stage = $('character-canvas');
+  const className = 'action-' + action;
+  stage.classList.remove('action-clap', 'action-dance', 'action-swap_positions', 'action-personal_song');
+  void stage.offsetWidth;
+  stage.classList.add(className);
+  window.setTimeout(() => stage.classList.remove(className), 2400);
+}
+
+function showPerformance(result) {
+  const performance = result?.performance;
+  if (!performance) return;
+  performAnimation(performance.action);
+  const speaker = state.cast.find((person) => person.id === performance.speakerId);
+  addChat('reply', speaker?.name || 'The cast', performance.text, performance.speakerId);
+  $('moment-output').textContent = performance.text;
+  $('active-speaker').textContent = 'Celebrating ' + (result.fanName || 'our guest');
+  logDirector('Performance agent selected ' + performance.action + ' for ' + (result.fanName || 'our guest') + '.');
+  if (performance.song) {
+    addChat('reply', 'Milo · personalised song', performance.song, 'milo');
+    if (state.voice && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance(performance.song));
+    }
+  }
+}
+
 function send(payload) {
   if (state.socket?.readyState === WebSocket.OPEN) state.socket.send(JSON.stringify(payload));
 }
@@ -103,6 +130,7 @@ function connect() {
       });
     }
     if (data.type === 'visitor') addChat('visitor', data.name, data.text);
+    if (data.type === 'performance') showPerformance(data);
     if (data.type === 'reply') {
       state.replies += 1;
       addChat('reply', data.speakerName, data.text, data.speakerId);
@@ -148,6 +176,12 @@ $('seed-chat').addEventListener('click', () => sampleVisitors.forEach(([name, te
   setTimeout(() => send({ type: 'chat', name, text }), index * 420);
 }));
 document.querySelectorAll('[data-moment]').forEach((button) => button.addEventListener('click', () => send({ type: 'moment', moment: button.dataset.moment })));
+document.querySelectorAll('[data-gift]').forEach((button) => button.addEventListener('click', () => {
+  send({ type: 'fan:event', event: { type: 'gift', gift: button.dataset.gift, name: $('fan-name').value } });
+}));
+document.querySelectorAll('[data-action]').forEach((button) => button.addEventListener('click', () => {
+  send({ type: 'fan:event', event: { type: 'instruction', action: button.dataset.action, name: $('fan-name').value } });
+}));
 $('clear-room').addEventListener('click', () => {
   if (confirm('Clear the local room conversation?')) send({ type: 'room:clear' });
 });
