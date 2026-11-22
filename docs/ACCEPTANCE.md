@@ -26,3 +26,16 @@
 ## Future screen-awareness milestones
 
 Do not mark AI visual reading complete until frame sampling, explicit analysis consent, provider integration, confidence handling, deduplication, privacy controls, and director integration have their own passing tests.
+
+## Supervised fan-event milestone
+
+- [ ] `npm run check` includes the fan-event agent module and its tests.
+- [ ] `npm test` verifies supported and unsupported gifts/instructions.
+- [ ] Starting the show enables the local fan-event simulator.
+- [ ] A simulated Rose triggers a coordinated cast applause animation and a thank-you.
+- [ ] A simulated Universe triggers a personalised demo verse for the named fan.
+- [ ] Dance and switch-places instructions trigger bounded reusable stage animations.
+- [ ] Unknown gift names and arbitrary instructions are rejected.
+- [ ] Pausing the show prevents fan-event performances.
+- [ ] The UI labels all fan events as local simulation, not real TikTok gifts.
+- [ ] No TikTok login, credentials, real gifts, or platform integration are required.
