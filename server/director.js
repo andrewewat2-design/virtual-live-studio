@@ -57,10 +57,10 @@ export function createDirector() {
       return { accepted: false, moderation, reply: null };
     }
     const now = Date.now();
-    const speaker = chooseSpeaker(moderation.text, turn);
+    let speaker = chooseSpeaker(moderation.text, turn);
     if (speaker.id === lastSpeaker && turn > 0) {
       const alternate = CAST.find((member) => member.id !== lastSpeaker);
-      if (alternate) Object.assign(speaker, alternate);
+      if (alternate) speaker = alternate;
     }
     const replyText = buildReply(moderation.text, speaker, turn);
     turn += 1;
