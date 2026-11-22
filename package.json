@@ -1,0 +1,24 @@
+{
+  "name": "virtual-live-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A lightweight virtual livestream studio with a centrally directed character cast.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:client": "vite --host 0.0.0.0",
+    "dev:server": "node --watch server/index.js",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "test": "node --test",
+    "check": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "three": "^0.182.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "vite": "^7.2.2"
+  }
+}
