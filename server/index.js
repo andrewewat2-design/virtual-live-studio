@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { WebSocketServer, WebSocket } from 'ws';
 import { createDirector, getCast, moderateMessage } from './director.js';
+import { createEntertainmentDirector } from './agents.js';
 import { loadSession, saveSession } from './store.js';
 
 const PORT = Number(process.env.PORT || 8787);
@@ -12,6 +13,7 @@ const RATE_LIMIT = 12;
 
 const session = await loadSession();
 const director = createDirector();
+const entertainmentDirector = createEntertainmentDirector();
 let showActive = session.showActive;
 let events = session.events;
 const clients = new Set();
@@ -78,6 +80,21 @@ function handleMessage(client, raw) {
     return;
   }
 
+  if (message.type === 'fan:event') {
+    if (!showActive) {
+      sendTo(client, { type: 'notice', level: 'info', text: 'Start the show before testing fan interactions.' });
+      return;
+    }
+    const result = entertainmentDirector.handleFanEvent(message.event);
+    if (!result.accepted) {
+      sendTo(client, { type: 'notice', level: 'warning', text: 'That gift or instruction is not supported in this prototype.' });
+      return;
+    }
+    const event = makeEvent('performance', result);
+    broadcast(event);
+    return;
+  }
+
   if (message.type === 'show:start') {
     showActive = true;
     const event = makeEvent('show', { active: true, text: 'The show is on.' });
@@ -92,6 +109,7 @@ function handleMessage(client, raw) {
   }
   if (message.type === 'room:clear') {
     director.reset();
+    entertainmentDirector.reset();
     events = [];
     const event = { type: 'room:cleared', at: Date.now() };
     void saveSession({ events, showActive }).catch((error) => console.error('Session save failed:', error.message));
