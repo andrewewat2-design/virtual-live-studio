@@ -12,10 +12,10 @@ The first release is a creator-operated studio prototype. It prioritizes audienc
 - A shared, bounded conversation context with speaker selection, turn-taking, cooldowns, and moderation.
 - A local audience simulator so the experience can be developed and tested without a TikTok account or live stream.\n- Creator-controlled browser screen capture for a TikTok tab, with an explicit permission prompt and local preview.
 - Lightweight stylized 3D characters and simple animation, designed to remain usable on a phone.
-- Browser speech synthesis as an optional first voice path; the studio must remain useful when speech synthesis is unavailable.
+- Browser speech synthesis as an optional first voice path; the studio must remain useful when speech synthesis is unavailable.\n- A content-awareness architecture that can eventually react to gameplay events as well as audience comments.
 - A replaceable platform adapter boundary. No undocumented scraping or unsupported platform integration is required for the local prototype.
 
-Browser TikTok screen awareness is being built in phases: capture and preview first, then bounded frame sampling, an optional vision-provider adapter, and director integration. The creator must explicitly start capture and separately enable visual analysis. The studio will not silently capture, automate TikTok controls, or post messages. See [docs/SCREEN-AWARENESS.md](docs/SCREEN-AWARENESS.md).\n\nA later phase may allow a creator to use a photo or video of a real business or location as the scene background, with virtual characters composited into that environment. This is deliberately outside the first milestone.
+Browser TikTok screen awareness is being built in phases: capture and preview first, then bounded frame sampling, an optional vision-provider adapter, and director integration. Gameplay awareness is part of the same roadmap: see [docs/GAME-AWARENESS.md](docs/GAME-AWARENESS.md) for the future gameplay and OBS source adapter design. The creator must explicitly start capture and separately enable visual analysis. The studio will not silently capture, automate TikTok controls, or post messages. See [docs/SCREEN-AWARENESS.md](docs/SCREEN-AWARENESS.md).\n\nA later phase may allow a creator to use a photo or video of a real business or location as the scene background, with virtual characters composited into that environment. This is deliberately outside the first milestone.
 
 ## Architecture
 
