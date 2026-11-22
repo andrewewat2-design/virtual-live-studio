@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11131b"><meta name="description" content="A virtual studio for interactive character-led livestream entertainment.">
+<title>Virtual Live Studio</title>
+</head>
+<body>
+<div id="app">
+<header class="topbar"><a class="brand" href="/"><span class="brand-mark">V</span><span>VIRTUAL <b>LIVE</b></span></a><div class="topbar-status"><span class="status-dot"></span><span id="connection-label">Connecting studio…</span></div><button id="settings-button" class="icon-button" type="button" aria-label="Studio settings">⚙</button></header>
+<main class="studio-layout">
+<section class="stage-column" aria-label="Virtual stage">
+<div class="stage-heading"><div><p class="eyebrow">YOUR SHOW, YOUR UNIVERSE</p><h1>The Studio</h1></div><span class="live-pill"><i></i> LOCAL PREVIEW</span></div>
+<div id="stage" class="stage"><div class="stage-grid"></div><div class="stage-glow"></div><div id="character-canvas" class="character-canvas" aria-label="Animated virtual cast"></div><div class="stage-caption"><span id="active-speaker">Waiting for the show to begin</span><span id="scene-label">NEON LOUNGE · SCENE 01</span></div><div class="stage-controls"><button id="start-show" class="primary-button" type="button">▶ Start show</button><button id="pause-show" class="secondary-button" type="button" disabled>Ⅱ Pause</button><button id="voice-toggle" class="secondary-button" type="button" aria-pressed="false">◖ Voice off</button></div></div>
+<div class="cast-section"><div class="section-heading"><div><p class="eyebrow">THE LINEUP</p><h2>Your cast</h2></div><span class="muted" id="cast-count">3 characters</span></div><div id="cast-list" class="cast-list"></div></div>
+</section>
+<aside class="interaction-column">
+<section class="audience-panel"><div class="section-heading"><div><p class="eyebrow">LIVE ROOM</p><h2>Audience chat</h2></div><span class="audience-count"><span class="status-dot"></span><b id="audience-count">0</b> here</span></div>
+<div class="chat-toolbar"><span>LOCAL SIMULATION</span><button id="seed-chat" class="text-button" type="button">Add sample visitors</button></div>
+<div id="chat-feed" class="chat-feed" role="log" aria-live="polite" aria-label="Audience and host messages"><div class="system-message">Your room is ready. Start the show or add sample visitors to begin.</div></div>
+<form id="chat-form" class="chat-form"><label class="sr-only" for="chat-input">Send a visitor message</label><input id="chat-input" name="message" maxlength="240" autocomplete="off" placeholder="Try chatting as a visitor…"><button type="submit" aria-label="Send message">➤</button></form><p class="input-hint">Messages are simulated locally. Nothing is sent to TikTok.</p>
+</section>
+<section class="director-panel"><div class="section-heading"><div><p class="eyebrow">BEHIND THE SCENES</p><h2>Show director</h2></div><span class="director-badge">ONE BRAIN</span></div><p class="director-copy">One central director chooses who speaks, keeps the conversation flowing, and protects the room. Characters do not run separate AI agents.</p><div id="director-status" class="director-status"><span class="status-dot"></span> Waiting for audience</div><div class="director-log" id="director-log"><span>Director initialized.</span></div></section>
+<section class="controls-panel"><div class="section-heading"><div><p class="eyebrow">INTERACTIVE MOMENTS</p><h2>Run a moment</h2></div></div><div class="moment-buttons"><button type="button" data-moment="question" class="moment-button">💬 Ask the room</button><button type="button" data-moment="poll" class="moment-button">📊 Quick poll</button><button type="button" data-moment="challenge" class="moment-button">🎯 Mini challenge</button></div><div id="moment-output" class="moment-output">Choose a moment to give the room something to do.</div></section>
+<section class="safety-panel"><span class="safety-icon">✓</span><div><b>Creator control stays with you</b><p>Pause the show, mute voice, or clear the room at any time.</p></div><button id="clear-room" class="text-button" type="button">Clear</button></section>
+</aside></main>
+<footer class="footer"><span>VIRTUAL LIVE STUDIO <span class="footer-dot">•</span> PROTOTYPE 0.1</span><span>Built for creators, designed for interaction.</span></footer>
+</div><script type="module" src="/src/main.js"></script>
+</body></html>
