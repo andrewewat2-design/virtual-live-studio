@@ -10,12 +10,12 @@ The first release is a creator-operated studio prototype. It prioritizes audienc
 - A small supporting cast that can join when useful.
 - One central director coordinates every character; characters are profiles, not independent always-running agents.
 - A shared, bounded conversation context with speaker selection, turn-taking, cooldowns, and moderation.
-- A local audience simulator so the experience can be developed and tested without a TikTok account or live stream.
+- A local audience simulator so the experience can be developed and tested without a TikTok account or live stream.\n- Creator-controlled browser screen capture for a TikTok tab, with an explicit permission prompt and local preview.
 - Lightweight stylized 3D characters and simple animation, designed to remain usable on a phone.
 - Browser speech synthesis as an optional first voice path; the studio must remain useful when speech synthesis is unavailable.
 - A replaceable platform adapter boundary. No undocumented scraping or unsupported platform integration is required for the local prototype.
 
-A later phase may allow a creator to use a photo or video of a real business or location as the scene background, with virtual characters composited into that environment. This is deliberately outside the first milestone.
+Browser TikTok screen awareness is being built in phases: capture and preview first, then bounded frame sampling, an optional vision-provider adapter, and director integration. The creator must explicitly start capture and separately enable visual analysis. The studio will not silently capture, automate TikTok controls, or post messages. See [docs/SCREEN-AWARENESS.md](docs/SCREEN-AWARENESS.md).\n\nA later phase may allow a creator to use a photo or video of a real business or location as the scene background, with virtual characters composited into that environment. This is deliberately outside the first milestone.
 
 ## Architecture
 
@@ -68,7 +68,7 @@ The exact Termux/Ubuntu setup instructions will be maintained in [docs/ANDROID-T
 
 ## Project status
 
-The repository is being initialized. The first milestone is the local interactive studio: cast, chat simulator, director, moderation, show controls, and tests. No live platform connection is claimed until an authorized integration has been verified.
+The repository foundation and first browser studio interface are in progress. The current screen-sharing milestone provides a creator-controlled browser capture preview only; it does not yet interpret screenshots with AI or connect to TikTok's internal event systems. The local audience simulator and deterministic director are separate from real TikTok engagement.
 
 ## License
 
